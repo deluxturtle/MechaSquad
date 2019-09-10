@@ -16,14 +16,6 @@ public class Player : MonoBehaviour
     Vector2 startPos;
     Vector3 shootDir;
     GameObject selectedMech = null;
-    float height;
-    float width;
-
-    private void Awake()
-    {
-        width = Screen.width / 2.0f;
-        height = Screen.height / 2.0f;
-    }
 
     public void Init(string name)
     {
@@ -65,37 +57,18 @@ public class Player : MonoBehaviour
                 Vector2 pos = touch.position;
                 Vector2 dist = pos - startPos;
                 shootDir = new Vector3(-dist.x, 0, -dist.y);
-                
-                Debug.DrawRay(selectedMech.transform.position, shootDir.normalized);
             }
 
             if(touch.phase == TouchPhase.Ended)
             {
-                Shoot(shootDir);
+                //Shoot(shootDir);
+                selectedMech.GetComponent<Mech>().Shoot(shootDir);
             }
         }
 
     }
 
-    /// <summary>
-    /// HitScan shooting style.
-    /// </summary>
-    /// <param name="pDir">Direction of Ray</param>
-    void Shoot(Vector3 pDir)
-    {
-        /**NOTE:
-         * Everything works except I think its hitting the collider in the mech
-         * Might need to let the mech handle its own firing at this point.
-         */
-        Ray ray = new Ray(selectedMech.transform.position, pDir.normalized);
-        Debug.DrawRay(selectedMech.transform.position, ray.direction, Color.red, 1f);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit, 100f);
-        GameObject temp = Instantiate(explosion);
-        Debug.Log(hit.point);
-        temp.transform.position = hit.point;
 
-    }
 
     /// <summary>
     /// Check to see if different mech was selected.
