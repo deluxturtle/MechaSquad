@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
             //Grab the starting position of touch and do first contact actions.
             if (touch.phase == TouchPhase.Began)
             {
-                startPos = touch.position;
-
                 //Ray cast down to mech obj.
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
                 RaycastHit hit;
@@ -41,23 +39,33 @@ public class Player : MonoBehaviour
                 Transform clickedObj = hit.collider.transform.parent;
                 if (clickedObj.GetComponent<Mech>() != null)
                 {
+                    startPos = touch.position;//start tracking if clicked a mech.
                     if (ClickedDifferentMech(clickedObj.gameObject))
                     {
                         selectedMech = clickedObj.gameObject;
                     }
+
                 }
                 else//No mech under cursor
                 {
-
+                    selectedMech = null;
                 }
             }
 
             //If dragging shoot bullet with the behavior of a slingshot.
             if (touch.phase == TouchPhase.Moved)
             {
-                if(move)
+                if (move && selectedMech != null)
                 {
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    RaycastHit hit;
+                    Physics.Raycast(ray, out hit);
 
+                    if(Vector3.Distance(hit.point, selectedMech.transform.position) > 1)
+                    {
+                        Debug.Log("ping");
+                        selectedMech.transform.position = hit.point;
+                    }
                 }
                 else
                 {
@@ -67,13 +75,15 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if(touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && selectedMech != null)
             {
                 selectedMech.GetComponent<Mech>().Shoot(shootDir);
             }
         }
 
     }
+
+    
 
 
 
