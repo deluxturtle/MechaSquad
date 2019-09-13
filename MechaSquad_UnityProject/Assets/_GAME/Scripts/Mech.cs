@@ -13,6 +13,7 @@ public class Mech : MonoBehaviour
     //This will proabably be programaticly changed for custom guns.
     [Tooltip("This is where the bullet will come from.")]
     public Transform gunPos;
+    float fuel = 10f;
     float maxRange = 100f;
     public ParticleSystem explosion;
 
@@ -20,11 +21,6 @@ public class Mech : MonoBehaviour
     {
         get { return alias; }
         set { alias = value; }
-    }
-
-    public string GetName()
-    {
-        return name;
     }
 
     /// <summary>
@@ -35,11 +31,24 @@ public class Mech : MonoBehaviour
     {
         Ray ray = new Ray(gunPos.position, dir);
         RaycastHit hit;
-        Physics.Raycast(ray, out hit, 50f);
+        Physics.Raycast(ray, out hit, maxRange);
         Debug.DrawRay(gunPos.position, dir);
         Debug.Log(hit.collider);
 
         GameObject.Instantiate(explosion, hit.point, Quaternion.identity);
+    }
+
+    public void Move()
+    {
+        
+    }
+
+    /// <summary>
+    /// Resets the movement and shooting resources.
+    /// </summary>
+    public void NewTurn()
+    {
+
     }
 
 

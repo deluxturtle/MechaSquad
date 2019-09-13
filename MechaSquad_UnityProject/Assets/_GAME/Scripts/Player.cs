@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour
 {
+    public bool move = false;
     [Tooltip("Testing Explosion Animation Obj")]
     public GameObject explosion;
     [Tooltip("Shows information about what the player is doing.")]
@@ -17,10 +18,6 @@ public class Player : MonoBehaviour
     Vector3 shootDir;
     GameObject selectedMech = null;
 
-    public void Init(string name)
-    {
-        
-    }
 
     private void Update()
     {
@@ -49,19 +46,29 @@ public class Player : MonoBehaviour
                         selectedMech = clickedObj.gameObject;
                     }
                 }
+                else//No mech under cursor
+                {
+
+                }
             }
 
             //If dragging shoot bullet with the behavior of a slingshot.
             if (touch.phase == TouchPhase.Moved)
             {
-                Vector2 pos = touch.position;
-                Vector2 dist = pos - startPos;
-                shootDir = new Vector3(-dist.x, 0, -dist.y);
+                if(move)
+                {
+
+                }
+                else
+                {
+                    Vector2 pos = touch.position;
+                    Vector2 dist = pos - startPos;
+                    shootDir = new Vector3(-dist.x, 0, -dist.y);
+                }
             }
 
             if(touch.phase == TouchPhase.Ended)
             {
-                //Shoot(shootDir);
                 selectedMech.GetComponent<Mech>().Shoot(shootDir);
             }
         }
@@ -79,7 +86,7 @@ public class Player : MonoBehaviour
     {
         if (pClickedObj != selectedMech)
         {
-            Debug.Log("MechName// " + pClickedObj.GetComponent<Mech>().GetName());
+            Debug.Log("MechName// " + pClickedObj.GetComponent<Mech>().Alias);
             return true;
         }
         else
