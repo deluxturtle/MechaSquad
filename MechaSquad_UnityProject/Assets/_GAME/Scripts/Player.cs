@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
     Vector3 shootDir;
     GameObject selectedMech = null;
 
+    public void StartTurn()
+    {
+
+    }
+
 
     private void Update()
     {

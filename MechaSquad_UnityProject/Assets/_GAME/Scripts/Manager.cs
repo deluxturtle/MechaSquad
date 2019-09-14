@@ -13,6 +13,14 @@ public class Manager : MonoBehaviour
         Debug.Log("Spawning Players.");
         SpawnPlayer("Player1");
         SpawnPlayer("Player2");
+
+    }
+
+    void StartGame()
+    {
+        Player curPlayer = players[0].GetComponent<Player>();
+        curPlayer.gameObject.SetActive(true);
+        curPlayer.StartTurn();
     }
 
     void SpawnPlayer(string playerName)
