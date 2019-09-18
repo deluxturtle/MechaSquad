@@ -22,7 +22,7 @@ public class TurnHandler : MonoBehaviour
             curPlayer.enabled = false;
         }
         pIndex++;
-        if (pIndex > players.Count)
+        if (pIndex >= players.Count)
         {
             pIndex = 0;
             round++;
@@ -34,10 +34,11 @@ public class TurnHandler : MonoBehaviour
             
         }
 
-
         curPlayer = players[pIndex].GetComponent<Player>();
         curPlayer.enabled = true;
     }
+
+
 
     public void AddPlayer(Player newPlayer)
     {

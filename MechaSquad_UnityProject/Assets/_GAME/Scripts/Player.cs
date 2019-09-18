@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     }
 
 
+
+
     private void Update()
     {
         //Touch Input
