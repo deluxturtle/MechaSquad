@@ -9,19 +9,14 @@ using UnityEngine;
 /// </summary>
 public class Mech : MonoBehaviour
 {
-    private string alias = "Siren_0x10";
     //This will proabably be programaticly changed for custom guns.
     [Tooltip("This is where the bullet will come from.")]
     public Transform gunPos;
-    float fuel = 10f;
-    float maxRange = 100f;
+    //float fuel = 10f;
+    float maxRange = 100f;//Of Raycast
     public ParticleSystem explosion;
-
-    public string Alias
-    {
-        get { return alias; }
-        set { alias = value; }
-    }
+    public PlayerType PlayerType { get; set; }
+    public string Alias { get; set; } = "Siren_0x10";
 
     /// <summary>
     /// Shoots for the mech.

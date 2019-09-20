@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     Vector3 shootDir;
     GameObject selectedMech = null;
     public string PlayerName { get; set; } = "player";
+    RaycastHit debughit;
 
     //public int MechLimit { get; set; }
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit);
+
 
                 //Select Mech
                 Transform clickedObj = hit.collider.transform.parent;
@@ -112,5 +114,10 @@ public class Player : MonoBehaviour
         else
             return false;
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(debughit.point, 2f);
     }
 }
