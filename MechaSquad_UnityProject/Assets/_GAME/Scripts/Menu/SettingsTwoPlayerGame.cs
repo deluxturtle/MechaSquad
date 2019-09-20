@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Author: Andrew Seba
-/// Description: Handles the UI interactions in the two player game setup and
-/// saves them to memory.
+/// Description: Handles the UI interactions in the two player game setup.
 /// </summary>
 public class SettingsTwoPlayerGame : MonoBehaviour
 {

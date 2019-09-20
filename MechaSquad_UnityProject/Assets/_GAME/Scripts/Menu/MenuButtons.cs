@@ -13,4 +13,21 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void _AddSceneName(string sceneName)
+    {
+        StartCoroutine(LoadAsyncScene(sceneName));
+    }
+
+    IEnumerator LoadAsyncScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        while(!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        
+    }
+
 }

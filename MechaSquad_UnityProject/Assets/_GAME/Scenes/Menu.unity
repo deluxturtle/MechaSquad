@@ -198,7 +198,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125003119}
+      - m_Target: {fileID: 887181677}
         m_MethodName: UpdatedMechLimitSlider
         m_Mode: 1
         m_Arguments:
@@ -370,7 +370,6 @@ GameObject:
   - component: {fileID: 125003116}
   - component: {fileID: 125003118}
   - component: {fileID: 125003117}
-  - component: {fileID: 125003119}
   m_Layer: 5
   m_Name: Panel_2pGameSetup
   m_TagString: Untagged
@@ -437,20 +436,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125003115}
   m_CullTransparentMesh: 0
---- !u!114 &125003119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125003115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8686bc6cf0044d438f6c254bb565533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mechLimitSlider: {fileID: 24600644}
-  mechLimitInputField: {fileID: 1298671300}
 --- !u!1 &274238634
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +629,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.6, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1002,8 +987,8 @@ RectTransform:
   m_Father: {fileID: 2104841496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6, y: 0}
-  m_AnchorMax: {x: 0.6, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: -0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1408,6 +1393,8 @@ GameObject:
   - component: {fileID: 887181675}
   - component: {fileID: 887181674}
   - component: {fileID: 887181673}
+  - component: {fileID: 887181676}
+  - component: {fileID: 887181677}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1479,6 +1466,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &887181676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887181672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716726e26dfea47459bbafa569a7f699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &887181677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887181672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8686bc6cf0044d438f6c254bb565533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechLimitSlider: {fileID: 24600644}
+  mechLimitInputField: {fileID: 1298671300}
 --- !u!1 &924235203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,7 +2300,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125003119}
+      - m_Target: {fileID: 887181677}
         m_MethodName: UpdatedMechInputField
         m_Mode: 1
         m_Arguments:
@@ -2506,7 +2519,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317264695}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 125003115}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 887181676}
+        m_MethodName: _AddSceneName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 2PlayerGame
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1317264695
@@ -3746,6 +3781,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 719654012}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

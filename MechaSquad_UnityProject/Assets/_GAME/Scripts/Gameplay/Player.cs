@@ -7,7 +7,7 @@ using UnityEngine;
 /// Author: Andrew Seba
 /// Description: 
 /// Most touch Input. Will be enabled when it's the players turn.
-/// script starts disabled
+/// script starts disabled.
 /// </summary>
 public class Player : MonoBehaviour
 {
@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     GameObject selectedMech = null;
     public string PlayerName { get; set; } = "player";
 
+    //public int MechLimit { get; set; }
+
     private void OnEnable()
     {
         Debug.Log("Player " + PlayerName + " is starting!");
     }
-
-
 
 
     private void Update()
