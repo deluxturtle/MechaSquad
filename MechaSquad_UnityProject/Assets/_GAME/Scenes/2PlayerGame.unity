@@ -2520,7 +2520,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh11984
+  m_Name: pb_Mesh12446
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2979,8 +2979,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
-  orthographic size: 7.09
+  orthographic: 0
+  orthographic size: 10.52
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3003,13 +3003,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817630164}
-  m_LocalRotation: {x: 0.23359713, y: -0.09664314, z: 0.01894255, w: 0.9673333}
-  m_LocalPosition: {x: 7.41, y: 7.52, z: -4.46}
+  m_LocalRotation: {x: 0.4109437, y: -0, z: -0, w: 0.91166073}
+  m_LocalPosition: {x: 5.17, y: 8.33, z: -0.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 27.103, y: -11.543, z: -0.54700005}
+  m_LocalEulerAnglesHint: {x: 48.528004, y: 0, z: 0}
 --- !u!1 &1834040048
 GameObject:
   m_ObjectHideFlags: 0

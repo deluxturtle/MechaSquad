@@ -27,7 +27,7 @@ public class MenuButtons : MonoBehaviour
         {
             yield return null;
         }
-        
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
     }
 
 }

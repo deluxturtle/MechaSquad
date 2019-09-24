@@ -45,23 +45,25 @@ public class Player : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit);
-
-
-                //Select Mech
-                Transform clickedObj = hit.collider.transform.parent;
-                if (clickedObj.GetComponent<Mech>() != null)
+                if (hit.collider != null)
                 {
-                    startPos = touch.position;//start tracking if clicked a mech.
-                    if (ClickedDifferentMech(clickedObj.gameObject))
+                    //Select Mech
+                    Transform clickedObj = hit.collider.transform.parent;
+                    if (clickedObj.GetComponent<Mech>() != null)
                     {
-                        selectedMech = clickedObj.gameObject;
-                    }
+                        startPos = touch.position;//start tracking if clicked a mech.
+                        if (ClickedDifferentMech(clickedObj.gameObject))
+                        {
+                            selectedMech = clickedObj.gameObject;
+                        }
 
+                    }
+                    else//No mech under cursor
+                    {
+                        selectedMech = null;
+                    }
                 }
-                else//No mech under cursor
-                {
-                    selectedMech = null;
-                }
+
             }
 
             //If dragging shoot bullet with the behavior of a slingshot.

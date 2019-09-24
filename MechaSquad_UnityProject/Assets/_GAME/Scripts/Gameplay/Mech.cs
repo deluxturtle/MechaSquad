@@ -27,8 +27,7 @@ public class Mech : MonoBehaviour
         Ray ray = new Ray(gunPos.position, dir);
         RaycastHit hit;
         Physics.Raycast(ray, out hit, maxRange);
-        Debug.DrawRay(gunPos.position, dir);
-        Debug.Log(hit.collider);
+        Debug.DrawRay(gunPos.position, dir, Color.red, 1f);
 
         GameObject.Instantiate(explosion, hit.point, Quaternion.identity);
     }
