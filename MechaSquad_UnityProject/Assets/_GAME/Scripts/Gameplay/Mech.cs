@@ -17,6 +17,15 @@ public class Mech : MonoBehaviour
     public ParticleSystem explosion;
     public PlayerType PlayerType { get; set; }
     public string Alias { get; set; } = "Siren_0x10";
+    private int hp = 1;
+    private int gunDmg = 10;
+
+
+    public void Init(string name, int pHp)
+    {
+        Alias = name;
+        hp = pHp;
+    }
 
     /// <summary>
     /// Shoots for the mech.
@@ -27,22 +36,24 @@ public class Mech : MonoBehaviour
         Ray ray = new Ray(gunPos.position, dir);
         RaycastHit hit;
         Physics.Raycast(ray, out hit, maxRange);
+        //Lasor looks pretty cool.
         Debug.DrawRay(gunPos.position, dir, Color.red, 1f);
+        Mech targetMech = hit.collider.GetComponentInParent<Mech>();
+        if (targetMech != null)
+            targetMech.Damage(gunDmg);
 
         GameObject.Instantiate(explosion, hit.point, Quaternion.identity);
     }
 
-    public void Move()
+    public void Damage(int amount)
     {
-        
-    }
+        hp -= amount;
 
-    /// <summary>
-    /// Resets the movement and shooting resources.
-    /// </summary>
-    public void NewTurn()
-    {
-
+        //Health empty
+        if(hp <= 0)
+        {
+            Destroy(this.gameObject, 0.3f);
+        }
     }
 
 
