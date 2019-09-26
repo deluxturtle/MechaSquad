@@ -15,7 +15,7 @@ public class GameSetup : MonoBehaviour
     public List<MechSpawnPoint> player1SpawnPoints = new List<MechSpawnPoint>();
     public List<MechSpawnPoint> player2SpawnPoints = new List<MechSpawnPoint>();
 
-
+    GameStatus gameStatus;
     TurnHandler turnHandlr;
     SettingsTwoPlayerGame settings;
 
@@ -43,18 +43,20 @@ public class GameSetup : MonoBehaviour
         playerObj.transform.SetParent(transform);
         Player player = playerObj.GetComponent<Player>();
         player.PlayerName = playerName;
-        turnHandlr.AddPlayer(player);
+        gameStatus.AddPlayer(player);
 
     }
 
-    void SpawnMechs(PlayerType playerType, int mechLimit)
+    List<Mech> SpawnMechs(PlayerType playerType, int mechLimit)
     {
+        List<Mech> mechs = new List<Mech>();
         for(int i = 0; i < mechLimit; i++)
         {
             //Fresh meat :3
             //Except its like fresh metal.
             GameObject freshMech = Instantiate(mechPrefab);
             Mech mechScript = freshMech.GetComponent<Mech>();
+            mechs.Add(mechScript);
             mechScript.PlayerType = playerType;
             if(playerType == PlayerType.Player1)
             {
@@ -68,5 +70,6 @@ public class GameSetup : MonoBehaviour
             }
             freshMech.transform.SetParent(transform);
         }
+        return mechs;
     }
 }

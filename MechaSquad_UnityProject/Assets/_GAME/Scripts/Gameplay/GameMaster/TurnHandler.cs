@@ -11,9 +11,24 @@ public class TurnHandler : MonoBehaviour
     [SerializeField]
     private int round = 0;
     List<Player> players = new List<Player>();
-    byte pIndex = 0;//player index.
+    int pIndex = 0;//player index.
     Player curPlayer;
+    GameStatus gameStatus;
 
+    private void Start()
+    {
+        gameStatus = GetComponent<GameStatus>();
+    }
+
+    public void StartGame()
+    {
+        pIndex = gameStatus.players.Count;
+        NextTurn();
+    }
+
+    /// <summary>
+    /// Disables player and activates next player in the list.
+    /// </summary>
     public void NextTurn()
     {
         //Disable last player.
@@ -38,11 +53,4 @@ public class TurnHandler : MonoBehaviour
         curPlayer.enabled = true;
     }
 
-
-
-    public void AddPlayer(Player newPlayer)
-    {
-        players.Add(newPlayer);
-        pIndex++;
-    }
 }

@@ -13,10 +13,11 @@ public class Mech : MonoBehaviour
     [Tooltip("This is where the bullet will come from.")]
     public Transform gunPos;
     //float fuel = 10f;
-    float maxRange = 100f;//Of Raycast
+    [Tooltip("Explosion Prefab")]
     public ParticleSystem explosion;
     public PlayerType PlayerType { get; set; }
     public string Alias { get; set; } = "Siren_0x10";
+    private float maxRange = 100f;//Of Raycast
     private int hp = 1;
     private int gunDmg = 10;
 

@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
     public GameObject explosion;
     [Tooltip("Shows information about what the player is doing.")]
     public bool printDebug = false;
+    public string PlayerName { get; set; } = "player";
+    List<Mech> mechs = new List<Mech>();
     Vector2 startPos;
     Vector3 shootDir;
     GameObject selectedMech = null;
-    public string PlayerName { get; set; } = "player";
     RaycastHit debughit;
 
     //public int MechLimit { get; set; }
