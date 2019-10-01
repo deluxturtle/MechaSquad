@@ -15,7 +15,7 @@ public class GameSetup : MonoBehaviour
     public List<MechSpawnPoint> player1SpawnPoints = new List<MechSpawnPoint>();
     public List<MechSpawnPoint> player2SpawnPoints = new List<MechSpawnPoint>();
 
-    GameStatus gameStatus;
+    public SquadController squadController;
     TurnHandler turnHandlr;
     SettingsTwoPlayerGame settings;
 
@@ -23,53 +23,62 @@ public class GameSetup : MonoBehaviour
     void Start()
     {
         settings = FindObjectOfType<SettingsTwoPlayerGame>();
-        int mechLimit = (int)settings.mechLimitSlider.value;
-        if(settings == null)
+        if (settings == null)
         {
             Debug.Log("Settings not found.");
         }
         turnHandlr = GetComponent<TurnHandler>();
-        Debug.Log("Spawning Players.");
-        SpawnPlayer("Player1");
-        SpawnMechs(PlayerType.Player1, mechLimit);
-        SpawnPlayer("Player2");//TODO: seperate settings into 2 sliders?
-        SpawnMechs(PlayerType.Player2, mechLimit);
+
+        int mechLimit = (int)settings.mechLimitSlider.value;
+
+        
+        //p1
+        SpawnPlayer(Team.Player1,"Player1");
+        SpawnMechs(Team.Player1, mechLimit);
+        //p2
+        SpawnPlayer(Team.Player2, "Player2");//TODO: seperate settings into 2 sliders?
+        SpawnMechs(Team.Player2, mechLimit);
+
         turnHandlr.NextTurn();
     }
 
-    void SpawnPlayer(string playerName)
+    void SpawnPlayer(Team team, string playerName)
     {
         GameObject playerObj = Instantiate(playerPrefab);
         playerObj.transform.SetParent(transform);
         Player player = playerObj.GetComponent<Player>();
         player.PlayerName = playerName;
-        gameStatus.AddPlayer(player);
+        squadController.AddPlayer(player);
 
     }
 
-    List<Mech> SpawnMechs(PlayerType playerType, int mechLimit)
+    void SpawnMechs(Team team, int mechLimit)
     {
-        List<Mech> mechs = new List<Mech>();
+        //List<Mech> mechs = new List<Mech>();
+        Squad squad = new Squad(team);
         for(int i = 0; i < mechLimit; i++)
         {
             //Fresh meat :3
             //Except its like fresh metal.
             GameObject freshMech = Instantiate(mechPrefab);
             Mech mechScript = freshMech.GetComponent<Mech>();
-            mechs.Add(mechScript);
-            mechScript.PlayerType = playerType;
-            if(playerType == PlayerType.Player1)
+            mechScript.Squad = squad; //Each mech has a reference to their own squad.
+            squad.AddMech(mechScript);
+            //mechs.Add(mechScript);
+            mechScript.PlayerType = team;
+            if(team == Team.Player1)
             {
                 freshMech.transform.position = player1SpawnPoints[i].transform.position;
                 freshMech.transform.rotation = player1SpawnPoints[i].transform.rotation;
             }
-            else if(playerType == PlayerType.Player2)
+            else if(team == Team.Player2)
             {
                 freshMech.transform.position = player2SpawnPoints[i].transform.position;
                 freshMech.transform.rotation = player2SpawnPoints[i].transform.rotation;
             }
             freshMech.transform.SetParent(transform);
         }
-        return mechs;
+        squadController.AddSquad(squad);
+        //return mechs;
     }
 }

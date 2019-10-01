@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     [Tooltip("Shows information about what the player is doing.")]
     public bool printDebug = false;
     public string PlayerName { get; set; } = "player";
+    public Team Team { get; set; }
+
+    //Private
     List<Mech> mechs = new List<Mech>();
     Vector2 startPos;
     Vector3 shootDir;

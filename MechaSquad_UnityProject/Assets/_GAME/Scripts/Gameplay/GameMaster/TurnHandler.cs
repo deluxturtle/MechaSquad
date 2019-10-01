@@ -10,19 +10,18 @@ public class TurnHandler : MonoBehaviour
 {
     [SerializeField]
     private int round = 0;
-    List<Player> players = new List<Player>();
     int pIndex = 0;//player index.
     Player curPlayer;
-    GameStatus gameStatus;
+    SquadController squadController;
 
-    private void Start()
+    private void Awake()
     {
-        gameStatus = GetComponent<GameStatus>();
+        squadController = GetComponent<SquadController>();
     }
 
     public void StartGame()
     {
-        pIndex = gameStatus.players.Count;
+        pIndex = squadController.players.Count;
         NextTurn();
     }
 
@@ -37,7 +36,7 @@ public class TurnHandler : MonoBehaviour
             curPlayer.enabled = false;
         }
         pIndex++;
-        if (pIndex >= players.Count)
+        if (pIndex >= squadController.players.Count)
         {
             pIndex = 0;
             round++;
@@ -49,7 +48,7 @@ public class TurnHandler : MonoBehaviour
             
         }
 
-        curPlayer = players[pIndex].GetComponent<Player>();
+        curPlayer = squadController.players[pIndex];
         curPlayer.enabled = true;
     }
 

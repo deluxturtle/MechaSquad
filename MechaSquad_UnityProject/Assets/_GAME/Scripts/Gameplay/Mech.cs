@@ -15,12 +15,22 @@ public class Mech : MonoBehaviour
     //float fuel = 10f;
     [Tooltip("Explosion Prefab")]
     public ParticleSystem explosion;
-    public PlayerType PlayerType { get; set; }
+    
+    public Squad Squad { get; set; }
+    public Team PlayerType { get; set; }
     public string Alias { get; set; } = "Siren_0x10";
+    public bool Destroyed { get; set; } = false;
+
+    //Private
+    VictoryConditions conditions;
     private float maxRange = 100f;//Of Raycast
     private int hp = 1;
     private int gunDmg = 10;
 
+    private void Awake()
+    {
+        conditions = FindObjectOfType<VictoryConditions>();
+    }
 
     public void Init(string name, int pHp)
     {
@@ -53,7 +63,9 @@ public class Mech : MonoBehaviour
         //Health empty
         if(hp <= 0)
         {
+            Squad.RemoveMech(this);
             Destroy(this.gameObject, 0.3f);
+            conditions.CheckForEnd();
         }
     }
 

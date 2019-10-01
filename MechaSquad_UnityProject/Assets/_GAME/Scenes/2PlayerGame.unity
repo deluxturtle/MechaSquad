@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44950557, g: 0.49957472, b: 0.5756822, a: 1}
+  m_IndirectSpecularColor: {r: 0.44950598, g: 0.49957538, b: 0.57568294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3022,9 +3022,10 @@ GameObject:
   - component: {fileID: 1834040049}
   - component: {fileID: 1834040051}
   - component: {fileID: 1834040052}
+  - component: {fileID: 1834040053}
   m_Layer: 0
   m_Name: GameMaster
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3057,6 +3058,7 @@ MonoBehaviour:
   - {fileID: 1927077942}
   - {fileID: 992624644}
   - {fileID: 1983237698}
+  squadController: {fileID: 1834040053}
 --- !u!4 &1834040050
 Transform:
   m_ObjectHideFlags: 0
@@ -3096,6 +3098,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8953c337eb51af644b4c8793ada48ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1834040053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834040048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7009f17d15c810c47bd804242968f9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  squads: []
 --- !u!1 &1855861871
 GameObject:
   m_ObjectHideFlags: 0

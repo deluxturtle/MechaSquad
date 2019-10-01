@@ -9,19 +9,38 @@ using UnityEngine;
 /// </summary>
 public class VictoryConditions : MonoBehaviour
 {
-    GameStatus gameStatus;
+    SquadController squadController;
     TurnHandler turnHndlr;
     private void Start()
     {
-        gameStatus = GetComponent<GameStatus>();
+        squadController = GetComponent<SquadController>();
         turnHndlr = GetComponent<TurnHandler>();
     }
 
     public void CheckForEnd()
     {
-        for(int i = 0; i < gameStatus.players.Count; i++)
+        //2player win conditions include
+            //other team loosing all mechs.
+        foreach(Squad squad in squadController.squads)
         {
-            //if()
+            Team team = squad.Team;
+            if(squad.alive <= 0)
+            {
+                if (team == Team.Player1)
+                    EndGame(Team.Player2);
+                if (team == Team.Player2)
+                    EndGame(Team.Player1);
+            }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="team">Winner</param>
+    void EndGame(Team team)
+    {
+        Debug.Log(team + " Wins the Game!");
+        Debug.Log("Game Over.");
     }
 }

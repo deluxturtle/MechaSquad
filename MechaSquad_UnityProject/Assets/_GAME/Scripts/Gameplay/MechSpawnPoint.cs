@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerType
+public enum Team
 {
     Player1,
-    Player2,
-    Bot
+    Player2
 };
 
 public class MechSpawnPoint : MonoBehaviour
 {
-    public PlayerType type;
+    public Team type;
 }
