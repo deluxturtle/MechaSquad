@@ -10,6 +10,8 @@ public class MusicPlayer : MonoBehaviour
 {
     [Tooltip("Place whatever song you want in this spot to listen first.")]
     public AudioClip startSong;
+    [Tooltip("Song to play during battle.")]
+    public AudioClip battleSong;
     private AudioSource audioSrc;
 
     private void Start()
@@ -18,6 +20,7 @@ public class MusicPlayer : MonoBehaviour
         if(audioSrc == null)
         {
             audioSrc = gameObject.AddComponent<AudioSource>();
+            audioSrc.loop = true;
         }
 
         if(startSong != null)
@@ -27,8 +30,25 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
-    public static void PlaySong(AudioClip audio)
+    public void PlaySong(AudioClip audio)
     {
+        //TODO: Make a fade? that would be cool.
+        audioSrc.clip = audio;
+        audioSrc.Play();
+    }
 
+    /// <summary>
+    /// Quick play for battlesong.
+    /// </summary>
+    public void PlayBattleSong()
+    {
+        audioSrc.clip = battleSong;
+        audioSrc.Play();
+    }
+
+    public void PlayMenuSong()
+    {
+        audioSrc.clip = startSong;
+        audioSrc.Play();
     }
 }
