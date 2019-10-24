@@ -25,6 +25,12 @@ public class Player : MonoBehaviour
     Vector3 shootDir;
     GameObject selectedMech = null;
     RaycastHit debughit;
+    PlayerAiming aimingScript;
+
+    private void Start()
+    {
+        aimingScript = GetComponent<PlayerAiming>();
+    }
 
     //public int MechLimit { get; set; }
 
@@ -59,6 +65,7 @@ public class Player : MonoBehaviour
                         if (ClickedDifferentMech(clickedObj.gameObject))
                         {
                             selectedMech = clickedObj.gameObject;
+                            EnableAiming();
                         }
 
                     }
@@ -69,6 +76,34 @@ public class Player : MonoBehaviour
                 }
 
             }
+            #if UNITY_EDITOR
+            if(Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit);
+                if (hit.collider != null)
+                {
+                    //Select Mech
+                    Transform clickedObj = hit.collider.transform.parent;
+                    if (clickedObj.GetComponent<Mech>() != null)
+                    {
+                        //start tracking if clicked a mech.
+                        startPos = Input.mousePosition;
+                        if (ClickedDifferentMech(clickedObj.gameObject))
+                        {
+                            selectedMech = clickedObj.gameObject;
+                            EnableAiming();
+                        }
+
+                    }
+                    else//No mech under cursor
+                    {
+                        selectedMech = null;
+                    }
+                }
+            }
+            #endif
 
             //If dragging shoot bullet with the behavior of a slingshot.
             if (touch.phase == TouchPhase.Moved)
@@ -101,8 +136,13 @@ public class Player : MonoBehaviour
 
     }
 
-    
-
+    /// <summary>
+    /// Enables the aiming script and starts the aiming process.
+    /// </summary>
+    void EnableAiming()
+    {
+        aimingScript.enabled = true;
+    }
 
 
     /// <summary>
