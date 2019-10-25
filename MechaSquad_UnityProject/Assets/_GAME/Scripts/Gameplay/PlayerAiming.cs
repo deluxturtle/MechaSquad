@@ -14,11 +14,14 @@ public class PlayerAiming : MonoBehaviour
     bool stopLerp = false;
     float value = 0;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        _StartTheLerp();
+        StartAiming();
     }
 
+    /// <summary>
+    /// Just incase the script or player gets disabled?
+    /// </summary>
     void OnDisable()
     {
         StopCoroutine("LerpValue");
@@ -36,14 +39,35 @@ public class PlayerAiming : MonoBehaviour
     void Input()
     {
         //Uhhh we need to click the screen dingus.
+        #if UNITY_EDITOR
         if(UnityEngine.Input.GetButtonDown("Jump"))
         {
-            stopLerp = true;
+            StopAiming();
         }
+        #endif
+        if(UnityEngine.Input.touchCount > 0)
+        {
+            Touch touch = UnityEngine.Input.GetTouch(0);
+            //On touch stop aiming.
+            if(touch.phase == TouchPhase.Began)
+            {
+                StopAiming();
+            }
+        }
+
     }
 
-    void _StartTheLerp()
+    /// <summary>
+    /// Sets the lerping loop to escape.
+    /// </summary>
+    void StopAiming()
     {
+        stopLerp = true;
+    }
+
+    void StartAiming()
+    {
+        value = 0;
         stopLerp = false;
         StartCoroutine("LerpValue");
     }
@@ -62,7 +86,6 @@ public class PlayerAiming : MonoBehaviour
             pos = Mathf.Lerp(minimum, maximum, value);
             value += multiplyer * Time.deltaTime;
             Debug.Log(pos);
-
             //https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
             //if hit the max flip the values and it will ping.
             //Pretty cool swap to save on memory.
@@ -75,5 +98,7 @@ public class PlayerAiming : MonoBehaviour
             }
             yield return null;
         }
+        //disable script when done.
+        this.enabled = false;
     }
 }

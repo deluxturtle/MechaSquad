@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
                         {
                             selectedMech = clickedObj.gameObject;
                             EnableAiming();
+                            //RIGHT NOW IT ONLY ENABLES THE SCRIPT IF YOU CLICK A NEW MECH.
                         }
 
                     }
@@ -105,33 +106,33 @@ public class Player : MonoBehaviour
             }
             #endif
 
-            //If dragging shoot bullet with the behavior of a slingshot.
-            if (touch.phase == TouchPhase.Moved)
-            {
-                if (move && selectedMech != null)
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    RaycastHit hit;
-                    Physics.Raycast(ray, out hit);
+            // //If dragging shoot bullet with the behavior of a slingshot.
+            // if (touch.phase == TouchPhase.Moved)
+            // {
+            //     if (move && selectedMech != null)
+            //     {
+            //         Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            //         RaycastHit hit;
+            //         Physics.Raycast(ray, out hit);
 
-                    if(Vector3.Distance(hit.point, selectedMech.transform.position) > 1)
-                    {
-                        Debug.Log("ping");
-                        selectedMech.transform.position = hit.point;
-                    }
-                }
-                else
-                {
-                    Vector2 pos = touch.position;
-                    Vector2 dist = pos - startPos;
-                    shootDir = new Vector3(-dist.x, 0, -dist.y);
-                }
-            }
+            //         if(Vector3.Distance(hit.point, selectedMech.transform.position) > 1)
+            //         {
+            //             Debug.Log("ping");
+            //             selectedMech.transform.position = hit.point;
+            //         }
+            //     }
+            //     else
+            //     {
+            //         Vector2 pos = touch.position;
+            //         Vector2 dist = pos - startPos;
+            //         shootDir = new Vector3(-dist.x, 0, -dist.y);
+            //     }
+            // }
 
-            if (touch.phase == TouchPhase.Ended && selectedMech != null)
-            {
-                selectedMech.GetComponent<Mech>().Shoot(shootDir);
-            }
+            // if (touch.phase == TouchPhase.Ended && selectedMech != null)
+            // {
+            //     selectedMech.GetComponent<Mech>().Shoot(shootDir);
+            // }
         }
 
     }
