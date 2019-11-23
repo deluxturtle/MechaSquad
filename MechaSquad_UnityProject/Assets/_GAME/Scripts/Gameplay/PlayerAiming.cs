@@ -8,11 +8,25 @@ using UnityEngine;
 /// </summary>
 public class PlayerAiming : MonoBehaviour
 {
+    public Transform needle;
+    [Header("Aim Settings")]
     public float minimum = -1.0f;
     public float maximum = 1.0f;
-    float multiplyer = 0.5f;//how fast the pinging will be multiplied.
+    [Range(0.1f, 5f)]
+    public float speed = 0.5f;//how fast the pinging will be multiplied.
+    public float minAngle = -45f;
+    public float maxAngle = 45f;
     bool stopLerp = false;
     float value = 0;
+    Quaternion left;
+    Quaternion right;
+
+    void Start()
+    {
+        left = Quaternion.Euler(new Vector3(0,0,minAngle));
+        right= Quaternion.Euler(new Vector3(0,0,maxAngle));
+
+    }
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -78,13 +92,12 @@ public class PlayerAiming : MonoBehaviour
     /// <returns></returns>
     IEnumerator LerpValue()
     {
-        
         float pos = 0;
         while(!stopLerp)
         {
-            
+            RotateNeedle((pos + 1)/2);
             pos = Mathf.Lerp(minimum, maximum, value);
-            value += multiplyer * Time.deltaTime;
+            value += speed * Time.deltaTime;
             Debug.Log(pos);
             //https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
             //if hit the max flip the values and it will ping.
@@ -96,9 +109,17 @@ public class PlayerAiming : MonoBehaviour
                 minimum = temp;
                 value = 0.0f;
             }
+            
             yield return null;
         }
         //disable script when done.
         this.enabled = false;
+    }
+
+    //
+    void RotateNeedle(float value)
+    {
+        Transform ntr = needle.transform;
+        needle.rotation = Quaternion.Lerp(right, left, value);
     }
 }
