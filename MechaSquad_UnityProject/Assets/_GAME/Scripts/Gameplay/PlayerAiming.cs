@@ -10,12 +10,12 @@ public class PlayerAiming : MonoBehaviour
 {
     public Transform needle;
     [Header("Aim Settings")]
-    public float minimum = -1.0f;
-    public float maximum = 1.0f;
     [Range(0.1f, 5f)]
     public float speed = 0.5f;//how fast the pinging will be multiplied.
     public float minAngle = -45f;
     public float maxAngle = 45f;
+    float minimum = -1.0f;
+    float maximum = 1.0f;
     bool stopLerp = false;
     float value = 0;
     Quaternion left;
